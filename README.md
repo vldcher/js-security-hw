@@ -6,6 +6,8 @@ Install python 2.7 via brew, gzip, anaconda etc.
 
 Install packages:
 ```
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
 pip install WebOb
 pip install Paste
 pip install webapp2
