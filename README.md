@@ -20,3 +20,5 @@ python level2.py
 ```
 
 Check game at http://127.0.0.1:8080 
+
+Origin source: https://xss-game.appspot.com
