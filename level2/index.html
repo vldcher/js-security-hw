@@ -41,6 +41,7 @@
  
         document.getElementById('post-form').onsubmit = function() {
           var message = document.getElementById('post-content').value;
+          message = message.replace(/onerror/g, '');
           DB.save(message, function() { displayPosts() } );
           document.getElementById('post-content').value = "";
           return false;

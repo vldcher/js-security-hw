@@ -21,7 +21,8 @@ page_footer = """
 main_page_markup = """
 <form action="" method="GET">
   <input id="query" name="query" value="Enter query here..."
-    onfocus="this.value=''">
+    onfocus="this.value=''"
+    pattern="[A-Za-z0-9]">
   <input id="button" type="submit" value="Search">
 </form>
 """
@@ -54,7 +55,7 @@ application = webapp.WSGIApplication([ ('.*', MainPage), ], debug=False)
 
 def main():
     from paste import httpserver
-    httpserver.serve(application, host='127.0.0.1', port='8080')
+    httpserver.serve(application, host='127.0.0.1', port='3010')
 
 if __name__ == '__main__':
     main()
