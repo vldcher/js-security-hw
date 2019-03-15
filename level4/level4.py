@@ -8,6 +8,16 @@ def render(tpl_path, context = {}):
         loader=jinja2.FileSystemLoader(path or './')
     ).get_template(filename).render(context)
 
+def is_digit(string):
+      if string.isdigit():
+        return True
+      else:
+        try:
+          float(string)
+          return True
+        except ValueError:
+          return False
+
 class MainPage(webapp.RequestHandler):
  
   def get(self):
@@ -20,15 +30,16 @@ class MainPage(webapp.RequestHandler):
     else:
       # Show the results page
       timer= self.request.get('timer', 0)
-      self.response.out.write(render('timer.html', { 'timer' : timer }))
-     
+      if is_digit(timer):
+        self.response.out.write(render('timer.html', { 'timer' : timer }))
+      else: return
     return
  
 application = webapp.WSGIApplication([ ('.*', MainPage), ], debug=False)
 
 def main():
     from paste import httpserver
-    httpserver.serve(application, host='127.0.0.1', port='8080')
+    httpserver.serve(application, host='127.0.0.1', port='3010')
 
 if __name__ == '__main__':
     main()

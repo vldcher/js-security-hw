@@ -17,7 +17,7 @@ application = webapp.WSGIApplication([ ('.*', MainPage) ], debug=False)
 
 def main():
     from paste import httpserver
-    httpserver.serve(application, host='127.0.0.1', port='8080')
+    httpserver.serve(application, host='127.0.0.1', port='3010')
 
 if __name__ == '__main__':
     main()

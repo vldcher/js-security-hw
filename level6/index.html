@@ -25,6 +25,10 @@
       }
  
       // Load this awesome gadget
+      if (url.includes('javascript')) {
+        return
+      };
+      
       scriptEl.src = url;
  
       // Show log messages

@@ -9,14 +9,18 @@ def render(tpl_path, context = {}):
     ).get_template(filename).render(context)
 
 class MainPage(webapp.RequestHandler): 
-  def get(self):
+  
+ def get(self):
     # Disable the reflected XSS filter for demonstration purposes
     self.response.headers.add_header("X-XSS-Protection", "0")
  
     # Route the request to the appropriate template
     if "signup" in self.request.path:
-      self.response.out.write(render('signup.html', 
-        {'next': self.request.get('next')}))
+      next= self.request.get('next')
+      if next == 'confirm':
+        self.response.out.write(render('signup.html', 
+          {'next': next}))
+      else: return
     elif "confirm" in self.request.path:
       self.response.out.write(render('confirm.html', 
         {'next': self.request.get('next', 'welcome')}))
@@ -29,7 +33,7 @@ application = webapp.WSGIApplication([ ('.*', MainPage), ], debug=False)
 
 def main():
     from paste import httpserver
-    httpserver.serve(application, host='127.0.0.1', port='8080')
+    httpserver.serve(application, host='127.0.0.1', port='3010')
 
 if __name__ == '__main__':
     main()
