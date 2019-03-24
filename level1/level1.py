@@ -4,9 +4,17 @@ page_header = """
   <head>
     <!-- Internal game scripts/styles, mostly boring stuff -->
     <script src="https://xss-game.appspot.com/static/game-frame.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.10/purify.min.js"></script>
     <link rel="stylesheet" href="https://xss-game.appspot.com/static/game-frame-styles.css" />
   </head>
- 
+
+  <script>
+    window.onload = function() {
+      var query = document.getElementById("query");
+      DOMPurify.sanitize(query, {FORBID_TAGS: ['script']});
+    };
+  </script>
+
   <body id="level1">
     <img src="https://xss-game.appspot.com/static/logos/level1.png">
       <div>
@@ -22,7 +30,7 @@ main_page_markup = """
 <form action="" method="GET">
   <input id="query" name="query" value="Enter query here..."
     onfocus="this.value=''"
-    pattern="[A-Za-z0-9]">
+    pattern="[A-Za-z0-9]{1,9}">
   <input id="button" type="submit" value="Search">
 </form>
 """
